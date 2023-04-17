@@ -1,0 +1,31 @@
+echo "Now, you can use bash.include system. call from `pwd` using $MYENV system"
+
+
+function include.os()
+{
+    source $MYENV/tools/bash/os.sh
+}
+
+function include.assert()
+{
+    source $MYENV/tools/bash/assert.sh
+}
+
+function include.path()
+{
+    source $MYENV/tools/bash/path.sh
+}
+
+function include.relative()
+{
+        # ref path.file.dirname
+        pushd `dirname $0` > /dev/null
+        local _RELATIVE_DIR=`pwd -P`
+        popd > /dev/null
+        source $_RELATIVE_DIR/$1
+}
+
+function include.absolute()
+{
+    source $1
+}

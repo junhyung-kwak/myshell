@@ -1,0 +1,22 @@
+
+
+
+alias act='conda activate '
+alias deact='conda deactivate'
+alias hnvda='watch -n 0.1 nvidia-smi '
+alias py='python3 '
+
+# prevent rm -rf to remove all [ref] https://www.lesstif.com/system-admin/rm-rf-14090708.html 
+#if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+#    alias rm='rm -i --preserve-root '  # * is wrong. custom removed
+#fi
+
+#alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 "
+alias cmmake='cmake .. && make -j5 '
+alias ccmmake='clear && cmake .. && make -j5 '
+
+
+# else
+alias zotero='zotero-snap'
+
+

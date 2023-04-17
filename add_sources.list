@@ -1,0 +1,11 @@
+# teamviewer
+deb https://linux.teamviewer.com/deb stable main
+
+# vscode
+deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+
+# zotero
+deb [signed-by=/usr/share/keyrings/zotero-archive-keyring.gpg by-hash=force] https://github.com/r    etorquere/zotero-deb/releases/download/apt-get ./
+
+# chrome 
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main

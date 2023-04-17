@@ -1,0 +1,87 @@
+echo "using os included"
+
+
+
+# excution
+function os.name() # macos|linux|windows
+{
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        echo "linux"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+        echo "macos"
+    elif [[ "$OSTYPE" == "cygwin" ]]; then
+        # POSIX compatibility layer and Linux environment emulation for Windows
+        echo "Not implemented os"
+    elif [[ "$OSTYPE" == "msys" ]]; then
+        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+        echo "windows"
+    elif [[ "$OSTYPE" == "win32" ]]; then
+        # I'm not sure this can happen.
+        echo "Not implemented os"
+    elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        # ...
+        echo "Not implemented os"
+    else
+        # Unknown.
+        echo "Unknown"
+    fi
+
+}
+
+
+# true : 0 / false : 1 ... amazing bash..
+
+# SELECT OSPATH
+function os.is_wsl()
+{
+    if  [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+        if [[ -n "$IS_WSL" || -n "$WSL_DISTRO_NAME" ]]; then
+            echo 0
+        else
+            echo 1
+        fi
+    else
+        echo 1
+    fi
+}
+
+function os.is_mac()
+{
+    if  [ "$(os.name)" == "macos" ]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
+function os.is_linux()
+{
+    if  [ "$(os.name)" == "linux" ]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
+function os.is_windows() {
+    if  [ "$(os.name)" == "windows" ]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
+
+########################################3
+
+function os.ubuntu.release(){
+
+        local text=`lsb_release -r`
+        local words=($text)
+
+        echo "${words[1]}"
+
+        
+}
