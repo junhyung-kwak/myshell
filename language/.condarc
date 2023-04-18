@@ -1,0 +1,35 @@
+source $BASH_INCLUDE
+include.os
+
+echo "..automatic conda setting loaded"
+
+if [ -e "${HOME}/anaconda3/etc/profile.d/conda.sh" ]; then # check exists
+    _conda_type="anaconda3"
+elif [ -e "${HOME}/miniconda3/etc/profile.d/conda.sh" ]; then
+    _conda_type="miniconda3"
+else
+    echo "cannot find conda.sh file path (update path list)"
+fi
+
+_conda_root="${HOME}/${_conda_type}"
+echo "${_conda_root}  ${_conda_type}"
+
+if  $(os.is_windows) ; then
+    export CONDA_SH="${_conda_root}/Scripts/activate.bat"
+else
+    export CONDA_SH="${_conda_root}/etc/profile.d/conda.sh" # check other comparibility
+fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('${_conda_root}/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "${_conda_root}/etc/profile.d/conda.sh" ]; then
+        . "${_conda_root}/etc/profile.d/conda.sh"
+    else
+        export PATH="${_conda_root}/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

@@ -3,17 +3,17 @@ echo "Now, you can use bash.include system. call from `pwd` using $MYENV system"
 
 function include.os()
 {
-    source $MYENV/tools/bash/os.sh
+    source $MYENV/func/os.func
 }
 
 function include.assert()
 {
-    source $MYENV/tools/bash/assert.sh
+    source $MYENV/func/assert.func
 }
 
 function include.path()
 {
-    source $MYENV/tools/bash/path.sh
+    source $MYENV/func/path.func
 }
 
 function include.relative()

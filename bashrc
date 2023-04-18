@@ -2,7 +2,7 @@ echo "Start myshell sourcing.."
 # bash custom design
 THIS_BASHRC_PATH="$( dirname "$BASH_SOURCE" )"
 
-source $THIS_BASHRC_PATH/include.func #$BASH_INCLUDE
+source $THIS_BASHRC_PATH/func/include.func #$BASH_INCLUDE
 
 include.os
 include.assert
@@ -37,7 +37,7 @@ bind 'set bell-style none'
 
 
 #if !command conda &> /dev/null; then
-    source ${THIS_BASHRC_PATH}/../conda/bashrc 
+    source ${THIS_BASHRC_PATH}/language/.condarc 
     #include.relative ../conda/bashrc
 #fi
 
