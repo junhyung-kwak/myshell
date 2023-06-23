@@ -8,4 +8,4 @@ cp -r ./* $target_dir/
 
 echo "export MYENV=$HOME/.config/myshell" >> $HOME/.bashrc
 echo "export BASH_INCLUDE=$HOME/.config/myshell/func/include.func" >> $HOME/.bashrc
-echo "source $MYENV/bashrc" >> $HOME/.bashrc
+echo "source \$MYENV/bashrc" >> $HOME/.bashrc
