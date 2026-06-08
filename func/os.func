@@ -56,6 +56,23 @@ function os.is_mac()
     fi
 }
 
+function os.is_macbook()
+{
+    if [ "$(os.name)" != "macos" ]; then
+        echo false
+        return
+    fi
+
+    local model
+    model="$(sysctl -n hw.model 2>/dev/null || true)"
+
+    if [[ "$model" == MacBook* ]]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
 function os.is_linux()
 {
     if  [ "$(os.name)" == "linux" ]; then
