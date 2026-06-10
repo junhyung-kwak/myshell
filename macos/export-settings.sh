@@ -2,6 +2,9 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+hitoolbox_plist="$script_dir/preferences/com.apple.HIToolbox.plist"
+symbolichotkeys_plist="$script_dir/preferences/com.apple.symbolichotkeys.plist"
+spectacle_plist="$script_dir/preferences/com.divisiblebyzero.Spectacle.plist"
 
 if [ "$(uname -s)" != "Darwin" ]; then
     echo "macos/export-settings.sh skipped: not macOS"
@@ -55,3 +58,21 @@ fi
 
 chmod +x "$script_dir/defaults.sh"
 echo "Saved keyboard defaults to $script_dir/defaults.sh"
+
+mkdir -p "$(dirname "$hitoolbox_plist")"
+export_preference_domain() {
+    local domain="$1"
+    local plist="$2"
+    local description="$3"
+
+    if defaults export "$domain" "$plist" 2>/dev/null; then
+        plutil -convert xml1 "$plist"
+        echo "Saved $description to $plist"
+    else
+        echo "Failed to save $description from $domain"
+    fi
+}
+
+export_preference_domain com.apple.HIToolbox "$hitoolbox_plist" "input source settings"
+export_preference_domain com.apple.symbolichotkeys "$symbolichotkeys_plist" "keyboard shortcut settings"
+export_preference_domain com.divisiblebyzero.Spectacle "$spectacle_plist" "Spectacle settings"

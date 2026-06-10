@@ -25,3 +25,5 @@ append_once "source \$MYENV/bashrc" "$shell_rc"
 if [ "$(uname -s)" = "Darwin" ]; then
     "$target_dir/macos/setup.sh"
 fi
+
+"$target_dir/ai/setup.sh"
