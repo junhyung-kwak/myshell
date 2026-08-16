@@ -14,6 +14,21 @@ append_once() {
     fi
 }
 
+install_with_backup() {
+    local src="$1"
+    local dst="$2"
+    local backup
+
+    if [ -f "$dst" ] && ! cmp -s "$src" "$dst"; then
+        backup="$dst.backup.$(date +%Y%m%d%H%M%S)"
+        cp "$dst" "$backup"
+        echo "Backed up existing $dst to $backup"
+    fi
+
+    cp "$src" "$dst"
+    echo "Installed $dst"
+}
+
 echo "cp to $target_dir"
 mkdir -p "$target_dir"
 cp -R ./* "$target_dir/"
@@ -21,6 +36,7 @@ cp -R ./* "$target_dir/"
 append_once "export MYENV=$HOME/.config/myshell" "$shell_rc"
 append_once "export BASH_INCLUDE=$HOME/.config/myshell/func/include.func" "$shell_rc"
 append_once "source \$MYENV/bashrc" "$shell_rc"
+install_with_backup "$target_dir/screenrc" "$HOME/.screenrc"
 
 if [ "$(uname -s)" = "Darwin" ]; then
     "$target_dir/macos/setup.sh"

@@ -12,6 +12,18 @@ The installer copies this repository to `~/.config/myshell`, updates
 `~/.bashrc` once, runs the macOS bootstrap only on macOS, and installs AI
 coding tools.
 
+It also installs `screenrc` to `~/.screenrc`. If an existing `~/.screenrc`
+differs, the installer backs it up before applying the repository version.
+
+## Screen
+
+GNU Screen setup is stored in `screenrc`.
+
+- `termcapinfo xterm* ti@:te@`: keeps terminal scrollback usable in xterm-like terminals, so mouse wheel scrolling does not get translated into shell history up/down.
+- `defscrollback 100000`: increases Screen scrollback.
+
+Detach and reattach existing Screen sessions after updating `~/.screenrc`.
+
 ## macOS / MacBook setup
 
 macOS setup is stored in `macos/`.
